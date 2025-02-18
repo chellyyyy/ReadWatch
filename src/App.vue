@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import PageHeader from './components/PageHeader.vue'
+import PageHeader from './components/layout/PageHeader.vue'
 
 export default {
   name: 'App',
