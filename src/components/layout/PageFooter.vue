@@ -22,14 +22,17 @@
 </template>
 
 <script>
+
 </script>
 
 <style lang="scss" scoped>
+// @use '../../assets/styles/global.scss';
+
 footer {
     width: 100%;
     height: 200px;
-    background-color: $secondary-color;
-    font-family: $font-primary;
+    background-color: vars.$secondary-color;
+    // font-family: $font-primary;
 
     .upper-part {
         .social-media {

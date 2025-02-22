@@ -31,6 +31,8 @@
 </script>
 
 <style lang="scss" scoped>
+// @use '../../assets/styles/global.scss';
+
 header {
     display: flex;
     flex-direction: row;
@@ -54,7 +56,7 @@ header {
     }
 
     .nav-section {
-        font-family: $font-primary;
+        font-family: vars.$font-primary;
         font-weight: 900;
         display: flex;
         gap: 20px;
@@ -71,7 +73,7 @@ header {
             height: 30px;
             padding-right: 30px;
             opacity: 60%;
-            font-family: $font-primary;
+            font-family: vars.$font-primary;
         }
 
         .search-button {

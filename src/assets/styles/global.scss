@@ -1,18 +1,14 @@
 @use "mixin";
 
-:root {
-    /* Color */
-    $primary-color: #181818;
-    $secondary-color: #1f262d;
+/* Color */
+$primary-color: #181818;
+$secondary-color: #1f262d;
 
-    $font-color-primary: white;
+$font-color-primary: white;
 
-    /* Font */
-    $font-primary: 'Montserrat', sans-serif;
-    $font-secondary: 'Playfair Display', serif;
-
-
-}
+/* Font */
+$font-primary: 'Montserrat', sans-serif;
+$font-secondary: 'Playfair Display', serif;
 
 body {
     font-family: $font-primary !important;
