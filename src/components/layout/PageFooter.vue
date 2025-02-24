@@ -7,11 +7,11 @@
                 <router-link to="/journal">Contact</router-link>
             </div>
             <div class="social-media">
-                <img src="https://img.icons8.com/windows/32/instagram-new.png" alt="instagram-new"/>
-                <img src="https://img.icons8.com/pulsar-line/48/threads.png" alt="threads"/>
-                <img src="https://img.icons8.com/ios-glyphs/30/twitterx--v2.png" alt="twitterx--v2"/>
-                <img src="https://img.icons8.com/material-outlined/24/bluesky.png" alt="bluesky"/>
-                <img src="https://img.icons8.com/material-outlined/24/facebook-new.png" alt="facebook-new"/>
+                <img src="https://img.icons8.com/ios/50/FFFFFF/instagram-new--v1.png" alt="instagram-new--v1"/>
+                <img src="https://img.icons8.com/ios/50/FFFFFF/threads.png" alt="threads"/>
+                <img src="https://img.icons8.com/ios/50/FFFFFF/twitterx--v1.png" alt="twitterx--v1"/>
+                <img src="https://img.icons8.com/ios/50/FFFFFF/facebook-new.png" alt="facebook-new"/>
+                <img src="https://img.icons8.com/ios/50/FFFFFF/youtube-play--v1.png" alt="youtube-play--v1"/>
             </div>
         </div>
 
@@ -26,21 +26,40 @@
 </script>
 
 <style lang="scss" scoped>
-// @use '../../assets/styles/global.scss';
-
 footer {
+    padding-top: 30px;
     width: 100%;
     height: 200px;
     background-color: vars.$secondary-color;
-    // font-family: $font-primary;
+    font-family: vars.$font-primary;
+    justify-items: center;
+    box-sizing: border-box;
+
+    .info-section a {
+        margin-right: 10px;
+    }
 
     .upper-part {
+        @include flex-row;
+        font-weight: bolder;
+        font-size: large;
+        width: 65%;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
         .social-media {
             img {
                 width: 28px;
                 height: 28px;
+                margin-left: 10px;
             }
         }
+    }
+
+    .lower-part {
+        color: vars.$font-color-primary;
+        width: 65%;
+        justify-items: left;
     }
 }
 

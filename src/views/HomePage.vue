@@ -3,5 +3,18 @@
 </template>
 
 <script setup>
-    console.log("here homepage")
+    import { ref, onMounted } from 'vue';
+    import { fetchPopularMovie } from '@/services/tmdbAPI';
+
+    const movies = ref([]);
+
+    onMounted(async () => {
+        try {
+            movies.value = await fetchPopularMovie();
+            console.log(movies);
+            
+        } catch (error) {
+            console.error("Cant fetch movies: ", error)
+        }
+    })
 </script>

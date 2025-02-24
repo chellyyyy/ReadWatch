@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header :class="{ 'transparent-header': isHome }">
         <div class="logo-section">
             <router-link to="/">
                 <img src="../../assets/images/weblogo.png" alt="">
@@ -26,22 +26,24 @@
     </header>
 </template>
 
-<script>
+<script setup>
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 
+const route = useRoute();
+
+const isHome = computed(() => route.path === '/');
 </script>
 
 <style lang="scss" scoped>
-// @use '../../assets/styles/global.scss';
-
 header {
-    display: flex;
-    flex-direction: row;
+    @include flex-row;
     align-items: center;
-    color: white;
-    background-color: #181818;
+    justify-content: center;
+    color: vars.$font-color-primary;
+    background-color: vars.$primary-color;
     width: 100%;
     height: 70px;
-    padding: 0 12%;
     box-sizing: border-box;
 
     .logo-section {
@@ -57,7 +59,7 @@ header {
 
     .nav-section {
         font-family: vars.$font-primary;
-        font-weight: 900;
+        font-weight: bold;
         display: flex;
         gap: 20px;
         width: 590px;
@@ -65,23 +67,24 @@ header {
 
     .search-section {
         position: relative;
+        width: 200px;
 
         input {
             border-radius: 10px;
             outline: none;
             border: none;
             height: 30px;
-            padding-right: 30px;
             opacity: 60%;
             font-family: vars.$font-primary;
+            padding: 0 28px 0 10px;
         }
 
         .search-button {
             position: absolute;
             background: none;
             border: none;
-            color: white;
-            right: 5px;
+            color: vars.$font-color-primary;
+            right: -15px;
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
@@ -92,7 +95,10 @@ header {
             }
         }
     }
+}
 
+.transparent-header {
+    background: linear-gradient(to bottom, vars.$secondary-color, rgba(0, 0, 0, 0));
 }
 
 </style>
