@@ -1,20 +1,25 @@
 <template>
-    <h1>home page</h1>
+    <div class="home">
+        <HomeBanner :url="bannerUrl"/>
+        <MovieGrid :movies="popularMovies" category="popular" size="small" />
+    </div>
 </template>
 
 <script setup>
     import { ref, onMounted } from 'vue';
-    import { fetchPopularMovie } from '@/services/tmdbAPI';
+    import MovieGrid from '@/components/movie/MovieGrid.vue';
+    import HomeBanner from '@/components/movie/HomeBanner.vue';
+    import { fetchMovie } from '@/services/tmdbAPI';
 
-    const movies = ref([]);
+    const popularMovies = ref([]);
+    const bannerUrl = ref('');
 
-    onMounted(async () => {
-        try {
-            movies.value = await fetchPopularMovie();
-            console.log(movies);
-            
-        } catch (error) {
-            console.error("Cant fetch movies: ", error)
-        }
+    const randomNum = Math.floor(Math.random() * 20) + 1;
+
+    onMounted(async () => {        
+        popularMovies.value = await fetchMovie();
+        bannerUrl.value = popularMovies.value[randomNum]['backdrop_path'];
+        console.log(bannerUrl.value);
+        
     })
 </script>

@@ -1,16 +1,37 @@
-// import axios from "axios";
+const ACCESS_KEY = import.meta.env.VITE_APP_TMDB_ACCESS_TOKEN;
+const BASE_URL = import.meta.env.VITE_APP_TMBD_BASE_URL;
 
-// const API_KEY = import.meta.VITE_APP_TMDB_API_KEY;
-// const BASE_URL = import.meta.VITE_APP_TMBD_BASE_URL;
+export const fetchMovie = async (category = 'popular', language = '', page = 1) => {
+    let url = `${BASE_URL}/movie/${category}?page=${page}`
+    
+    let langParam = "";
+    switch(language) {
+        case "english":
+            langParam = "en-US";
+            break;
+        case "vietnamese":
+            langParam = "vi-VN";
+            break;
+        case "japanese":
+            langParam = "ja-JP";
+            break;
+        case "french":
+            langParam = "fr-FR";
+            break;
+        case "korean":
+            langParam = "ko-KR";
+            break;
+        case "chinese":
+            langParam = "zh-CN";
+            break;
+        default:
+            langParam = "";
+    }
 
-// export const fetchPopularMovie = async () => {
-//     const response = await axios.get (`${BASE_URL}/movie/popular?api_key=${API_KEY}`)
-//     return response.data.results;
-// }
-const ACCESS_KEY = import.meta.VITE_APP_TMDB_ACCESS_TOKEN;
+    if (langParam != "") {
+        url = `${BASE_URL}/movie/${category}?language=${langParam}&page=${page}`;
+    }
 
-export const fetchPopularMovie = async () => {
-    const url = 'https://api.themoviedb.org/3/movie/popular?page=2';
     const options = {
         method: 'GET',
         headers: {
@@ -19,8 +40,16 @@ export const fetchPopularMovie = async () => {
         }
     };
 
-    fetch(url, options)
-        .then(res => res.json())
-        .then(json => console.log(json))
-        .catch(err => console.error(err));
+    try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+        const json = await response.json();
+        return json.results;
+    } catch(error) {
+        console.error(error);
+        return `Can not fetch. Error: ${error}`;     
     }
+}

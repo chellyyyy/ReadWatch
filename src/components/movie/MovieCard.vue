@@ -1,7 +1,7 @@
 <template>
     <div class="movie-card" :style="{ width: cardWidth, height: cardHeight }">
         <router-link :to="`/movie/${movie.id}`">
-            <img :src="getImageUrl(movie.poster_path, imgSize)" alt="" class="poster">
+            <img :src="getImageUrl(movie.poster_path, size)" alt="" class="poster">
         </router-link>
     </div>
 
@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { computed, defineProps } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps({
     movie: Object,
@@ -32,10 +32,13 @@ const getImageUrl = (path, size) => {
         medium: "w342",
         large: "w500"
     }
-    return `https://image.tmdb.org/t/p/${sizes[size] || "w342"}`;
+
+    console.log(sizes[size]);
+    
+    return `https://image.tmdb.org/t/p/${sizes[size] || "w342"}/${path}`;
 }
 
-// Format ngay thang
+// Format date
 const formatDate = (date) => {
     return new Date(date).toLocaleDateString();
 }
@@ -71,6 +74,8 @@ const cardHeight = computed(() => {
 }
 
 .movie-info {
+    display: none;
+
     padding: 5px;
     background: rgba(0, 0, 0, 0.7);
     color: vars.$font-color-primary;
