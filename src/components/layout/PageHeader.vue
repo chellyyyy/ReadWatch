@@ -38,6 +38,7 @@ const isHome = computed(() => route.path === '/');
 <style lang="scss" scoped>
 header {
     @include flex-row;
+    position: absolute;
     align-items: center;
     justify-content: center;
     color: vars.$font-color-primary;
@@ -45,6 +46,7 @@ header {
     width: 100%;
     height: 70px;
     box-sizing: border-box;
+    z-index: 900;
 
     .logo-section {
         width: 250px;
@@ -98,6 +100,7 @@ header {
 }
 
 .transparent-header {
+    top: 0;
     background: linear-gradient(to bottom, vars.$secondary-color, rgba(0, 0, 0, 0));
 }
 

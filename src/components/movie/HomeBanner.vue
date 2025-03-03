@@ -1,7 +1,20 @@
 <template>
-    <div class="banner-container">
-        <img :src="completeUrl(url)" alt="" class="banner">
-        <div class="overlay"></div>
+    <div class="home-banner">
+        <div class="banner-container">
+            <img :src="completeUrl(url)" alt="" class="banner">
+            <div class="overlay"></div>
+        </div>
+
+        <div class="quote-container">
+            <span class="quote">
+                Track films you've watched. <br> 
+                Save those you want to see. <br>
+                Tell your friends what's good.
+            </span>
+            <button>
+                Get started - it's free!
+            </button>
+        </div>
     </div>
 </template>
 
@@ -18,11 +31,19 @@ const completeUrl = (url) => {
 </script>
 
 <style lang="scss" scoped>
+.home-banner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+}
+
 .banner-container {
     position: relative;
     width: 100%;
-    height: 700px;
+    height: 600px;
     overflow: hidden;
+    margin: 0 auto 0 auto;
 }
 
 .overlay {
@@ -31,7 +52,8 @@ const completeUrl = (url) => {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, transparent 20%, black 100%);
+    background: radial-gradient(circle, rgba(0,0,0,0) 20%, vars.$primary-color 80%, vars.$primary-color 100%);
+    
 }
 
 .banner {
@@ -39,7 +61,30 @@ const completeUrl = (url) => {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    // box-shadow: inset 100px 100px 100px 100px rgba(0, 0, 0, 0.5);
+}
 
+.bottom-garident {
+    transform: translateY(-50%);
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(0deg, vars.$primary-color 60%, rgba(255,255,255,0) 100%);
+}
+
+.quote-container {
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 200px;
+    background: linear-gradient(0deg, vars.$primary-color 60%, rgba(24, 24, 24, 0.062) 100%);
+
+    .quote {
+        font-family: vars.$font-secondary;
+        font-weight: 900;
+        font-size: 45px;
+        color: vars.$font-color-primary;
+        line-height: 1.34;
+    }
 }
 </style>

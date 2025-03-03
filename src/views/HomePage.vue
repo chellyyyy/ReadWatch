@@ -1,12 +1,14 @@
 <template>
     <div class="home">
         <HomeBanner :url="bannerUrl"/>
+        <PageHeader />
         <MovieGrid :movies="popularMovies" category="popular" size="small" />
     </div>
 </template>
 
 <script setup>
     import { ref, onMounted } from 'vue';
+    import PageHeader from '@/components/layout/PageHeader.vue';
     import MovieGrid from '@/components/movie/MovieGrid.vue';
     import HomeBanner from '@/components/movie/HomeBanner.vue';
     import { fetchMovie } from '@/services/tmdbAPI';
@@ -23,3 +25,11 @@
         
     })
 </script>
+
+<style lang="scss" scoped>
+    .home {
+        position: relative;
+        background-color: vars.$primary-color;
+        z-index: -2;
+    }
+</style>
