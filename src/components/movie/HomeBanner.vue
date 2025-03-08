@@ -11,15 +11,21 @@
                 Save those you want to see. <br>
                 Tell your friends what's good.
             </span>
-            <button>
+        </div>
+
+        <div class="button-container">
+            <BaseButton size="large">
                 Get started - it's free!
-            </button>
+            </BaseButton>
+
+            <span>The social network for film lovers.</span>
         </div>
     </div>
 </template>
 
 <script setup>
 import { defineProps } from 'vue';
+import BaseButton from '../ui/BaseButton.vue'
 
 defineProps({
     url: String
@@ -76,7 +82,7 @@ const completeUrl = (url) => {
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    height: 200px;
+    height: 300px;
     background: linear-gradient(0deg, vars.$primary-color 60%, rgba(24, 24, 24, 0.062) 100%);
 
     .quote {
@@ -87,4 +93,21 @@ const completeUrl = (url) => {
         line-height: 1.34;
     }
 }
+
+.button-container {
+    height: 100px;
+    transform: translateY(-80%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    span {
+        font-size: 16px;
+        font-weight: 600;
+        font-family: vars.$font-primary;
+        color: vars.$font-color-primary;
+    }
+}
+
 </style>

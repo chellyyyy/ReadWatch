@@ -32,8 +32,6 @@ const getImageUrl = (path, size) => {
         medium: "w342",
         large: "w500"
     }
-
-    console.log(sizes[size]);
     
     return `https://image.tmdb.org/t/p/${sizes[size] || "w342"}/${path}`;
 }
