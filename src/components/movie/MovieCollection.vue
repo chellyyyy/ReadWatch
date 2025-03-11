@@ -1,10 +1,11 @@
 <template>
-    <div class="movie-colle" :style="{gap: props.flexGap}">
+    <div class="movie-colle" :style="{ gap: props.flexGap }">
         <div class="movie-item"
             v-for="movie in preprocessData"
             :style="{ width: cardWidth,
                      height: cardHeight, 
-                     'margin-left': isStack ? '-' + stackGap : 0}"
+                     'margin-left': isStack ? '-' + stackGap : 0
+                    }"
             :key="movie.id"
         >
             <img :src="getImageUrl(movie.poster_path, size)" alt="">
