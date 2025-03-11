@@ -21,6 +21,7 @@
             <span>The social network for film lovers.</span>
         </div>
     </div>
+
 </template>
 
 <script setup>
