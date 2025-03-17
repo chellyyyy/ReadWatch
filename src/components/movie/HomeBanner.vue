@@ -60,7 +60,6 @@ const completeUrl = (url) => {
     width: 100%;
     height: 100%;
     background: radial-gradient(circle, rgba(0,0,0,0) 20%, vars.$primary-color 80%, vars.$primary-color 100%);
-    
 }
 
 .banner {

@@ -57,7 +57,7 @@ footer {
     }
 
     .lower-part {
-        color: vars.$font-color-primary;
+        color: vars.$font-grey;
         width: 65%;
         justify-items: left;
     }

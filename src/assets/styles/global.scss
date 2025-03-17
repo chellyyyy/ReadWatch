@@ -2,17 +2,10 @@
 $primary-color: #181818;
 $secondary-color: #1f262d;
 
-$font-color-primary: white;
+$font-color-primary: #eeeeee;
+$font-grey: #abc;
+$devider-color: #456;
 
 /* Font */
 $font-primary: 'Montserrat', sans-serif;
 $font-secondary: 'Playfair Display', serif;
-
-body {
-    font-family: $font-primary !important;
-
-    a {
-        text-decoration: none;
-        color: $font-color-primary;
-    }
-}

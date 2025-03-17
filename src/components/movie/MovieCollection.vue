@@ -24,7 +24,6 @@ const props = defineProps({
     size: String,
     isStack: {type: Boolean, default: false},
     stackGap: {type: String, default: '0'},
-    colleWidth: {type: String, default: '200px'},
     flexGap: {type: String, default: '10px'}
 })
 
@@ -49,6 +48,17 @@ const cardHeight = computed(() => {
     justify-content: center;
     width: 100%;
     height: auto;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+        height: 100%;
+        background: linear-gradient(to left, rgb(24, 24, 24) 10%, transparent);
+        pointer-events: none;
+    }
 }
 
 .movie-item {
