@@ -8,16 +8,15 @@ A full-stack web application inspired by [Letterboxd](https://letterboxd.com), w
 
 ### Frontend:
 - [Vue.js](https://vuejs.org/) — Progressive JavaScript framework
-- Vue Router, Vuex (or Pinia) for state management
+- Vue Router, Vuex for state management
 - Axios for API requests
 
 ### Backend:
 - [Node.js](https://nodejs.org/) with Express.js
 - RESTful API design
 - [AWS](https://aws.amazon.com/) Services:
-  - **Amazon RDS** — Database (e.g., PostgreSQL/MySQL)
-  - **Amazon S3** — Media storage (e.g., posters, profile pictures)
-  - **AWS Lambda / EC2** — Hosting backend
+  - **Amazon RDS** — Database (MySQL)
+  - **AWS EC2** — Hosting backend
   - **Cognito or JWT** — Authentication & authorization
 
 ---
