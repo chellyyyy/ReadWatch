@@ -80,8 +80,8 @@ jobs:
           script: |
             DEPLOY_PATH=/home/${{ secrets.EC2_USER }}/ReadWatch/frontend
             cd $DEPLOY_PATH
-            rm -rf dist
-            tar -xzf frontend-dist.tar.gz
-            rm frontend-dist.tar.gz
+            sudo rm -rf dist
+            sudo tar -xzf frontend-dist.tar.gz
+            sudo rm frontend-dist.tar.gz
             sudo chown -R www-data:www-data $DEPLOY_PATH/dist
             sudo systemctl reload nginx || sudo service nginx reload
