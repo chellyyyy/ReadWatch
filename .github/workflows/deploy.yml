@@ -60,7 +60,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: frontend-build
-          path: frontend_build_temp # Temporary directory on the runner
+          path: frontend_build_temp
 
       - name: SSH and Deploy to EC2
         uses: appleboy/ssh-action@master
@@ -70,17 +70,14 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           port: 22
           script: |
-            DEPLOY_PATH=/home/ubuntu/ReadWatch/frontend # Path to the project on EC2
-
-            ssh -vvv -o StrictHostKeyChecking=yes -i "${{ secrets.EC2_PRIVATE_KEY }}" ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} 'echo "SSH CONNECT SUCCESS"'
-
-            sudo rm -rf $DEPLOY_PATH/dist # Remove the old dist directory
-
-            sudo mkdir -p $DEPLOY_PATH/dist # Create the dist directory
-
-            rsync -avz frontend_build_temp/dist/ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:$DEPLOY_PATH/dist/ # Copy the built files to EC2
-
-            sudo chown -R www-data:www-data $DEPLOY_PATH/dist # Change ownership to the Nginx user (usually www-data)
-
-            sudo systemctl reload nginx # Reload Nginx configuration
-            sudo service nginx reload # Restart Nginx service
+            DEPLOY_PATH=/home/ubuntu/ReadWatch/frontend
+            mkdir -p ~/.ssh  # Ensure .ssh directory exists
+            echo "${{ secrets.EC2_HOST_KEY }}" >> ~/.ssh/known_hosts
+            chmod 600 ~/.ssh/known_hosts
+            ssh -o UserKnownHostsFile=~/.ssh/known_hosts -o StrictHostKeyChecking=yes -i "${{ secrets.EC2_PRIVATE_KEY }}" ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} 'echo "SSH connection successful!"'
+            rsync -avz -e "ssh -o UserKnownHostsFile=~/.ssh/known_hosts -o StrictHostKeyChecking=yes -i ${{ secrets.EC2_PRIVATE_KEY }}" frontend_build_temp/dist/ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:$DEPLOY_PATH/dist/
+            sudo rm -rf $DEPLOY_PATH/dist
+            sudo mkdir -p $DEPLOY_PATH/dist
+            sudo chown -R www-data:www-data $DEPLOY_PATH/dist
+            sudo systemctl reload nginx
+            sudo service nginx reload
