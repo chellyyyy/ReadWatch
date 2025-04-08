@@ -56,19 +56,23 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           port: 22
           script: |
-            DEPLOY_PATH=/home/ubuntu/ReadWatch/frontend
+            DEPLOY_PATH=/home/***/ReadWatch/frontend
 
+            # Create destination directory
             sudo mkdir -p $DEPLOY_PATH/dist
 
-            sudo rm -rf $DEPLOY_PATH/dist/*
+            # Verify artifact
+            ls -l /tmp/deploy/artifact.tar.gz
 
-            sudo mkdir -p /tmp/deploy
+            # Set execute permission for artifact
+            chmod +x /tmp/deploy/artifact.tar.gz
 
-            echo "${{ secrets.ARTIFACT_BASE64 }}" | base64 -d > /tmp/deploy/artifact.tar.gz
+            # Extract artifact
+            tar -xzf /tmp/deploy/artifact.tar.gz -C $DEPLOY_PATH
 
-            tar -xzf /tmp/deploy/artifact.tar.gz -C $DEPLOY_PATH/dist
+            # Change ownership
+            sudo chown -R www-data:www-data $DEPLOY_PATH/dist
 
-            chown -R www-data:www-data $DEPLOY_PATH/dist
-
-            # Reload nginx
+            # Restart Nginx
             sudo systemctl reload nginx
+            sudo service nginx reload
