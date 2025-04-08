@@ -71,5 +71,8 @@ jobs:
             ls -l
             echo "--------------"
             ls
+            cd dist
+            echo "--------------"
+            ls
             sudo systemctl reload nginx
             echo "Nginx đã được tải lại"
