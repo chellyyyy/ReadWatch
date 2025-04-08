@@ -32,12 +32,25 @@ jobs:
           cd frontend
           npm run build
 
+      - name: Archive frontend dist
+        run: |
+          tar -czf frontend-dist.tar.gz -C frontend dist
+
+      - name: Upload frontend artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: frontend-dist.tar.gz
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Download frontend artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-dist
+          path: .
 
       - name: Upload dist to EC2 via SCP
         uses: appleboy/scp-action@master
@@ -46,8 +59,8 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           port: 22
-          source: "frontend/dist/*"
-          target: "/home/***/ReadWatch/frontend/dist"
+          source: "frontend-dist.tar.gz"
+          target: "/home/${{ secrets.EC2_USER }}/ReadWatch/frontend/"
 
       - name: Remote Deploy Commands
         uses: appleboy/ssh-action@master
@@ -57,6 +70,10 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           port: 22
           script: |
-            DEPLOY_PATH=/home/***/ReadWatch/frontend/dist
-            sudo chown -R www-data:www-data $DEPLOY_PATH
+            DEPLOY_PATH=/home/${{ secrets.EC2_USER }}/ReadWatch/frontend
+            cd $DEPLOY_PATH
+            rm -rf dist
+            tar -xzf frontend-dist.tar.gz
+            rm frontend-dist.tar.gz
+            sudo chown -R www-data:www-data $DEPLOY_PATH/dist
             sudo systemctl reload nginx || sudo service nginx reload
