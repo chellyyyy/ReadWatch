@@ -57,5 +57,11 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           port: 22
           script: |
+            cd /home/ubuntu/ReadWatch/frontend
+            rm -rf dist
+            mkdir dist
+            
+            rsync -avz frontend/dist/ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu/ReadWatch/frontend/dist/
+
             sudo systemctl reload nginx
             sudo service nginx reload
