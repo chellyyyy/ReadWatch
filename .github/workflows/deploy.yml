@@ -71,13 +71,9 @@ jobs:
           port: 22
           script: |
             DEPLOY_PATH=/home/ubuntu/ReadWatch/frontend
-            mkdir -p ~/.ssh  # Ensure .ssh directory exists
+            mkdir -p ~/.ssh
             echo "${{ secrets.EC2_HOST_KEY }}" >> ~/.ssh/known_hosts
             chmod 600 ~/.ssh/known_hosts
-            ssh -o UserKnownHostsFile=~/.ssh/known_hosts -o StrictHostKeyChecking=yes -i "${{ secrets.EC2_PRIVATE_KEY }}" ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} 'echo "SSH connection successful!"'
-            rsync -avz -e "ssh -o UserKnownHostsFile=~/.ssh/known_hosts -o StrictHostKeyChecking=yes -i ${{ secrets.EC2_PRIVATE_KEY }}" frontend_build_temp/dist/ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:$DEPLOY_PATH/dist/
-            sudo rm -rf $DEPLOY_PATH/dist
-            sudo mkdir -p $DEPLOY_PATH/dist
-            sudo chown -R www-data:www-data $DEPLOY_PATH/dist
-            sudo systemctl reload nginx
-            sudo service nginx reload
+
+            # Kiểm tra SSH đơn giản
+            ssh -o StrictHostKeyChecking=yes -i "${{ secrets.EC2_PRIVATE_KEY }}" ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} 'echo "Kết nối SSH thành công!"'
