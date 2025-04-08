@@ -56,8 +56,8 @@
         </div>
 
         <div class="mid-title-container">
-            <!-- <p class="mid-title">Write and share reviews. Compile your own lists. Share your life in film.</p> -->
-            <p class="mid-title">TESTTESTTESTTESTTESTTESTTESTTESTTEST</p>
+            <p class="mid-title">Write and share reviews. Compile your own lists. Share your life in film.</p>
+            <!-- <p class="mid-title">TESTTESTTESTTESTTESTTESTTESTTESTTEST</p> -->
             <p class="mid-intro">Below are some popular reviews and lists from this week. Sign up to create your own.</p>
         </div>
 
