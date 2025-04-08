@@ -64,7 +64,7 @@ jobs:
             sudo rm -rf dist
             echo "Nội dung sau khi xóa:"
             ls -l
-            sudo cp -r frontend/dist .
+            sudo cp -r /home/ubuntu/readwatch/frontend/dist .
             echo "Nội dung sau khi sao chép:"
             ls -l
             sudo systemctl reload nginx
