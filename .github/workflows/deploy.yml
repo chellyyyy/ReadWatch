@@ -57,10 +57,15 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           port: 22
           script: |
+            echo "Thư mục hiện tại: $(pwd)"
             cd /var/www/html/readwatch/
+            echo "Nội dung trước khi xóa:"
+            ls -l
             rm -rf dist
+            echo "Nội dung sau khi xóa:"
+            ls -l
             cp -r frontend/dist .
-
-            # some backend script
-
+            echo "Nội dung sau khi sao chép:"
+            ls -l
             sudo systemctl reload nginx
+            echo "Nginx đã được tải lại"
