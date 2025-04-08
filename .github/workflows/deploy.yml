@@ -61,10 +61,10 @@ jobs:
             cd /var/www/html/readwatch/
             echo "Nội dung trước khi xóa:"
             ls -l
-            rm -rf dist
+            sudo rm -rf dist
             echo "Nội dung sau khi xóa:"
             ls -l
-            cp -r frontend/dist .
+            sudo cp -r frontend/dist .
             echo "Nội dung sau khi sao chép:"
             ls -l
             sudo systemctl reload nginx
