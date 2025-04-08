@@ -32,16 +32,35 @@ jobs:
           cd frontend
           npm run build
 
+      - name: Package frontend build
+        run: |
+          cd frontend
+          tar -czvf frontend_build.tar.gz dist/
+
       - name: Upload frontend build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: frontend-build
-          path: frontend/dist
+          path: frontend/frontend_build.tar.gz
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up SSH Agent
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.EC2_PRIVATE_KEY }}
+
+      - name: Add EC2 Host Key to Known Hosts
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_HOST_KEY }}" >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
       - name: Download frontend build artifacts
         uses: actions/download-artifact@v4
         with:
@@ -56,25 +75,20 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           port: 22
           script: |
-            DEPLOY_PATH=/home/***/ReadWatch/frontend
+            DEPLOY_PATH=/home/ubuntu/ReadWatch/frontend
 
             # Create destination directory
             sudo mkdir -p $DEPLOY_PATH/dist
 
-            # Verify artifact
-            ls -l /tmp/deploy/artifact.tar.gz
-            pws
-            ls
+            # Transfer artifact to EC2
+            rsync -avz frontend_build_temp/frontend_build.tar.gz ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/tmp/deploy/
 
-            # # Set execute permission for artifact
-            # chmod +x /tmp/deploy/artifact.tar.gz
+            # Extract artifact on EC2
+            sudo tar -xzf /tmp/deploy/frontend_build.tar.gz -C $DEPLOY_PATH/dist
 
-            # # Extract artifact
-            # tar -xzf /tmp/deploy/artifact.tar.gz -C $DEPLOY_PATH
+            # Change ownership
+            sudo chown -R www-data:www-data $DEPLOY_PATH/dist
 
-            # # Change ownership
-            # sudo chown -R www-data:www-data $DEPLOY_PATH/dist
-
-            # # Restart Nginx
-            # sudo systemctl reload nginx
-            # sudo service nginx reload
+            # Restart Nginx
+            sudo systemctl reload nginx
+            sudo service nginx reload
