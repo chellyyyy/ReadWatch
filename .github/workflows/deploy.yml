@@ -72,6 +72,8 @@ jobs:
           script: |
             DEPLOY_PATH=/home/ubuntu/ReadWatch/frontend # Path to the project on EC2
 
+            ssh -vvv -o StrictHostKeyChecking=yes -i "${{ secrets.EC2_PRIVATE_KEY }}" ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} 'echo "SSH CONNECT SUCCESS"'
+
             sudo rm -rf $DEPLOY_PATH/dist # Remove the old dist directory
 
             sudo mkdir -p $DEPLOY_PATH/dist # Create the dist directory
