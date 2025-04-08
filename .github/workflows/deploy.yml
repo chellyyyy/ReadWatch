@@ -63,16 +63,18 @@ jobs:
 
             # Verify artifact
             ls -l /tmp/deploy/artifact.tar.gz
+            pws
+            ls
 
-            # Set execute permission for artifact
-            chmod +x /tmp/deploy/artifact.tar.gz
+            # # Set execute permission for artifact
+            # chmod +x /tmp/deploy/artifact.tar.gz
 
-            # Extract artifact
-            tar -xzf /tmp/deploy/artifact.tar.gz -C $DEPLOY_PATH
+            # # Extract artifact
+            # tar -xzf /tmp/deploy/artifact.tar.gz -C $DEPLOY_PATH
 
-            # Change ownership
-            sudo chown -R www-data:www-data $DEPLOY_PATH/dist
+            # # Change ownership
+            # sudo chown -R www-data:www-data $DEPLOY_PATH/dist
 
-            # Restart Nginx
-            sudo systemctl reload nginx
-            sudo service nginx reload
+            # # Restart Nginx
+            # sudo systemctl reload nginx
+            # sudo service nginx reload
