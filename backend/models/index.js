@@ -1,8 +1,8 @@
 import sequelize from '../config/database.js';
-import User from './user.model.js';
+import users from './user.model.js';
 
-const db = { sequelize, User };
+const db = { sequelize, users };
 
-await sequelize.sync({ alter: true });
+// await sequelize.sync({ alter: true });
 
 export default db;
