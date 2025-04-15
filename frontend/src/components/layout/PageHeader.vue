@@ -8,11 +8,11 @@
 
         <div class="nav-section">
             <router-link to="/">SIGN IN</router-link>
-            <router-link to="/register">CREATE ACCOUNT</router-link>
-            <router-link to="/films">FILMS</router-link>
-            <router-link to="/lists">LISTS</router-link>
-            <router-link to="/members">MEMBERS</router-link>
-            <router-link to="/journal">JOURNAL</router-link>
+            <router-link to="/">CREATE ACCOUNT</router-link>
+            <router-link to="/">FILMS</router-link>
+            <router-link to="/">LISTS</router-link>
+            <router-link to="/">MEMBERS</router-link>
+            <router-link to="/">JOURNAL</router-link>
         </div>
 
         <div class="search-section">

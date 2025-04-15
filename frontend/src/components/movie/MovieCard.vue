@@ -73,7 +73,6 @@ const cardHeight = computed(() => {
 
 .movie-info {
     display: none;
-
     padding: 5px;
     background: rgba(0, 0, 0, 0.7);
     color: vars.$font-color-primary;

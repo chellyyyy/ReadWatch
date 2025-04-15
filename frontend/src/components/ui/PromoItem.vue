@@ -17,11 +17,11 @@ defineProps({
 .intro-item {
     color: vars.$font-grey;
     height: 90px;
-    width: 300px;
+    // width: 20%;
     background-color: vars.$secondary-color;
     border-radius: 5px;
     padding: 10px;
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
     display: flex;
     flex-direction: row;
     flex: 10% 90%;

@@ -6,12 +6,14 @@
             <MovieCollection 
                 :movies="popularMovies" 
                 size="large"
-                :movieNum="6"
+                :movieNum="'6'"
             />
         </div>
 
         <div class="introduction">
-            <p class="intro-title">READWATCH LET YOU...</p>
+            <div class="intro-title">
+                <p>&nbsp;&nbsp;&nbsp;READWATCH LET YOU...</p>
+            </div>
             <div class="promo-container">
                 <PromoItem 
                     iconSrc="https://img.icons8.com/hatch/64/menu-2.png"
@@ -50,7 +52,7 @@
                 <MovieCollection 
                 :movies="popularMovies" 
                 size="small"
-                :movieNum="12"
+                :movieNum="'12'"
             />
             </div>
         </div>
@@ -60,7 +62,25 @@
             <p class="mid-intro">Below are some popular reviews and lists from this week. Sign up to create your own.</p>
         </div>
 
-        <ReviewCard />
+        <div class="popular-container">
+            <div class="popular-left-part">
+                <ListHeader 
+                    list-title="POPULAR REVIEWS THIS WEEK"
+                    link-to="/"
+                />
+
+                <ReviewCard />
+            </div>
+            <div class="popular-right-part">
+                <div class="poppular-upper-right">
+                    <ListHeader 
+                    list-title="POPULAR LISTS"
+                    link-to="/"
+                />
+                </div>
+                <div class="poppular-lower-right"></div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -72,6 +92,7 @@
     import MovieCollection from '@/components/movie/MovieCollection.vue';
     import PromoItem from '@/components/ui/PromoItem.vue';
     import ReviewCard from '@/components/review/ReviewCard.vue';
+    import ListHeader from '@/components/ui/ListHeader.vue';
 
     const popularMovies = ref([]);
     const bannerUrl = ref('');
@@ -88,7 +109,6 @@
 .home {
     position: relative;
     background-color: vars.$primary-color;
-    z-index: -2;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -105,25 +125,25 @@
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
-    width: 60%;
+    width: 1050px;
 
     .intro-title {
-        position: absolute;
         color: vars.$font-grey;
-        left: 355px;
+        width: 100%;
     }
 
     .promo-container {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 20px;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-rows: auto auto;
+        grid-template-columns: 32.9% 32.9% 32.9%;
+        gap: 10px;
+        padding: 10px;
     }
 }
 
 .live-feed {
     color: vars.$font-grey;
-    margin: 30px 0 0 10px;
+    margin-top: 30px;
 
     .live-header {
         margin-bottom: 10px;
@@ -139,6 +159,22 @@
     .mid-title {
         font-size: 26px;
         margin: 40px 0 20px 0;
+    }
+}
+
+.popular-container {
+    width: 1022px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .popular-left-part {
+        width: 65%;
+    }
+
+    .popular-right-part {
+        width: 27%;
     }
 }
 

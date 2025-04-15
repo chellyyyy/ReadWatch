@@ -40,6 +40,7 @@ const props = defineProps({
     display: flex;
     flex-direction: row;
     width: 100%;
+    gap: 25px;
 
     .review-img-container {
         width: 70px;
@@ -53,5 +54,37 @@ const props = defineProps({
             max-height: 100%;
         }
     }
+
+    .film-info {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: flex-end;
+
+        .film-name {
+            font-family: vars.$font-secondary;
+            font-weight: 900;
+            font-size: 22px;
+        }
+
+        .film-year {
+            color: vars.$font-grey;
+        }
+    }
+
+    .review-detail {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .user-icon-src {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+
+
 }
 </style>

@@ -1,50 +1,25 @@
-const ACCESS_KEY = import.meta.env.VITE_APP_TMDB_ACCESS_TOKEN;
-const BASE_URL = import.meta.env.VITE_APP_TMBD_BASE_URL;
-
 export const fetchMovie = async (category = 'popular', language = '', page = 1) => {
-    let url = `${BASE_URL}/movie/${category}?page=${page}`
+    const params = new URLSearchParams();
 
-    console.log("asdf", ACCESS_KEY, BASE_URL);
-    
-    
-    let langParam = "";
-    switch(language) {
-        case "english":
-            langParam = "en-US";
-            break;
-        case "vietnamese":
-            langParam = "vi-VN";
-            break;
-        case "japanese":
-            langParam = "ja-JP";
-            break;
-        case "french":
-            langParam = "fr-FR";
-            break;
-        case "korean":
-            langParam = "ko-KR";
-            break;
-        case "chinese":
-            langParam = "zh-CN";
-            break;
-        default:
-            langParam = "";
+    if (language !== '') {
+        const langMap = {
+            english: "en-US",
+            vietnamese: "vi-VN",
+            japanese: "ja-JP",
+            french: "fr-FR",
+            korean: "ko-KR",
+            chinese: "zh-CN"
+        };
+        const langParam = langMap[language] || '';
+        if (langParam) params.append('language', langParam);
     }
 
-    if (langParam != "") {
-        url = `${BASE_URL}/movie/${category}?language=${langParam}&page=${page}`;
-    }
+    params.append('page', page);
 
-    const options = {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-            Authorization: ACCESS_KEY
-        }
-    };
+    const url = `/api/movies/${category}?${params.toString()}`;
 
     try {
-        const response = await fetch(url, options);
+        const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
@@ -52,7 +27,7 @@ export const fetchMovie = async (category = 'popular', language = '', page = 1) 
         const json = await response.json();
         return json.results;
     } catch(error) {
-        console.error(error);
-        return `Can not fetch. Error: ${error}`;     
+        console.error("Fetch movie error:", error);
+        return [];
     }
-}
+};

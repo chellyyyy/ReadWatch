@@ -2,9 +2,9 @@
     <footer>
         <div class="upper-part">
             <div class="info-section">
-                <router-link to="/journal">About</router-link>
-                <router-link to="/journal">Term</router-link>
-                <router-link to="/journal">Contact</router-link>
+                <router-link to="/">About</router-link>
+                <router-link to="/">Term</router-link>
+                <router-link to="/">Contact</router-link>
             </div>
             <div class="social-media">
                 <img src="https://img.icons8.com/ios/50/FFFFFF/instagram-new--v1.png" alt="instagram-new--v1"/>
