@@ -1,13 +1,13 @@
 <template>
 <div class="review-card-container">
     <div class="review-img-container">
-        <img :src="imgSrc" alt="">
+        <img :src="getImageUrl(imgSrc, 'small')" alt="">
     </div>
 
     <div class="review-info-container">
         <div class="film-info">
-            <a href="" class="film-name">{{ filmName }}</a>
-            <a href="" class="film-year">{{ filmYear }}</a>
+            <a href="" class="film-name">{{ movieName }}</a>
+            <a href="" class="film-year">{{ movieYear }}</a>
         </div>
         <div class="review-detail">
             <a href="" class="user-icon">
@@ -18,11 +18,10 @@
                 <span>{{ userRating }}</span>
                 <img width="14" height="14" src="https://img.icons8.com/ios-filled/50/40C057/star.png" alt=""/>
             </a>
-            <a href="" class="reply-count">{{ replyCount }}</a>
+            <!-- <a href="" class="reply-count">{{ replyCount }}</a> -->
         </div>
         <div class="review-content">
-            <!-- <span>{{ reviewContent }}</span> -->
-            <span>test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test</span>
+            <span>{{ reviewContent }}</span>
         </div>
         <div class="react-count">
             <img width="16" height="16" src="https://img.icons8.com/material-rounded/24/737373/like--v1.png" alt=""/>
@@ -33,16 +32,20 @@
 </template>
 
 <script setup>
+import { getImageUrl } from '../common/utils';
+
 const props = defineProps({
-    imgSrc: {type: String, default: "https://image.tmdb.org/t/p/w500//cnqztuI8rYP2XkGDvhMUmLbqnNe.jpg"},
-    filmName: {type: String, default: "Film Name"},
-    filmYear: {type: String, default: "2025"},
+    review: Object,
+    imgSrc: String,
     userIcon: {type: String, default: "https://image.tmdb.org/t/p/w500//cnqztuI8rYP2XkGDvhMUmLbqnNe.jpg"},
     userName: {type: String, default: "user"},
-    userRating: {type: Number, default: 4.6},
     replyCount: {type: Number, default: 95},
     reviewContent: String,
-    heartCount: {type: Number, default: 0}
+    heartCount: {type: Number, default: 0},
+    movieID: Number,
+    movieName: String,
+    userRating: Number,
+    movieYear: String
 })
 
 </script>
@@ -58,7 +61,7 @@ const props = defineProps({
         width: 76px;
         height: 111px;
         overflow: hidden;
-        border-radius: 2px;
+        border-radius: 3px;
 
         img {
             object-fit: cover;
@@ -121,6 +124,12 @@ const props = defineProps({
     .review-content {
         color: vars.$text-color;
         font-family: vars.$font-secondary;
+        width: 550px;
+        height: auto;
+
+        span {
+            line-height: 1.5;
+        }
     }
 
     .react-count {

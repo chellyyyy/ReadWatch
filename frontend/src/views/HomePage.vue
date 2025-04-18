@@ -69,14 +69,15 @@
                     link-to="/"
                 />
 
-                <ReviewCard />
+                <ReviewList />
             </div>
             <div class="popular-right-part">
                 <div class="poppular-upper-right">
                     <ListHeader 
-                    list-title="POPULAR LISTS"
-                    link-to="/"
-                />
+                        list-title="POPULAR LISTS"
+                        link-to="/"
+                    />
+                    <ListPreview />
                 </div>
                 <div class="poppular-lower-right"></div>
             </div>
@@ -91,8 +92,9 @@
     import { fetchMovie } from '@/services/tmdbAPI';
     import MovieCollection from '@/components/movie/MovieCollection.vue';
     import PromoItem from '@/components/ui/PromoItem.vue';
-    import ReviewCard from '@/components/review/ReviewCard.vue';
+    import ReviewList from '@/components/review/ReviewList.vue';
     import ListHeader from '@/components/ui/ListHeader.vue';
+    import ListPreview from '@/components/list/ListPreview.vue';
 
     const popularMovies = ref([]);
     const bannerUrl = ref('');
@@ -155,6 +157,7 @@
 .mid-title-container {
     color: vars.$font-grey;
     text-align: center;
+    margin: 30px 0px;
 
     .mid-title {
         font-size: 26px;
@@ -170,11 +173,11 @@
     justify-content: space-between;
 
     .popular-left-part {
-        width: 65%;
+        width: 68%;
     }
 
     .popular-right-part {
-        width: 27%;
+        width: 230px;
     }
 }
 
