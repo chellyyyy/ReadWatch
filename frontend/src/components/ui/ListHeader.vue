@@ -29,9 +29,15 @@ defineProps({
     border-bottom: solid 1px vars.$devider-color;
     line-height: 1.5;
 
+    .list-title {
+        font-size: 13px;
+    }
+
     .list-expand a {
         color: vars.$font-grey !important;
         cursor: pointer;
+        font-size: 11px;
+        font-weight: 300;
     }
 }
 

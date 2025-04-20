@@ -24,7 +24,7 @@ const props = defineProps({
     size: String,
     isStack: {type: Boolean, default: false},
     stackGap: {type: String, default: '0'},
-    flexGap: {type: String, default: '10px'}
+    flexGap: {type: String, default: '5px'}
 })
 
 const preprocessData = computed(()=> {
@@ -64,12 +64,18 @@ const cardHeight = computed(() => {
 .movie-item {
     overflow: hidden;
     border-radius: 5px;
+    border: 3px solid transparent;
     
     img {
         object-fit: cover;
         max-width: 100%;
         max-height: 100%;
     }
+}
+
+.movie-item:hover {
+    border: 3px solid vars.$rating-color;
+    border-radius: 3px;
 }
 
 .movie-item:nth-child(1) {

@@ -79,8 +79,25 @@
                     />
                     <ListPreview />
                 </div>
-                <div class="poppular-lower-right"></div>
+
+                <div class="poppular-lower-right">
+                    <ListHeader 
+                        list-title="POPULAR REVIEWERS"
+                        link-to="/"
+                    />
+                    <ReviewerList />
+                </div>
             </div>
+        </div>
+
+        <div class="stories-container">
+            <ListHeader 
+                list-title="RECENT STORIES"
+                link-to="/"
+                list-expand="ALL HQS"
+            />
+
+            <StoryList />
         </div>
     </div>
 </template>
@@ -95,6 +112,8 @@
     import ReviewList from '@/components/review/ReviewList.vue';
     import ListHeader from '@/components/ui/ListHeader.vue';
     import ListPreview from '@/components/list/ListPreview.vue';
+    import ReviewerList from '@/components/review/ReviewerList.vue';
+    import StoryList from '@/components/stories/StoryList.vue';
 
     const popularMovies = ref([]);
     const bannerUrl = ref('');
@@ -181,4 +200,12 @@
     }
 }
 
+.poppular-lower-right {
+    margin-top: 50px;
+}
+
+.stories-container {
+    width: 1022px;
+    margin-top: 40px;
+}
 </style>

@@ -61,7 +61,7 @@ onMounted(async () => {
 }
 
 .devider {
-    border-bottom: solid 1px vars.$devider-color;
+    @include devider;
     margin: 15px 0 15px 0;
 }
 </style>

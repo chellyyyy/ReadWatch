@@ -7,6 +7,8 @@ export const GetList = async (req, res) => {
             SELECT
                 a.id AS list_id,
                 a.user_id,
+                u.username,
+                u.avatar_url,
                 a.name AS list_name,
                 a.description,
                 a.created_at,
@@ -16,6 +18,8 @@ export const GetList = async (req, res) => {
                 readwatch.CustomLists a
             LEFT JOIN
                 readwatch.CustomListMovies b ON a.id = b.list_id
+            LEFT JOIN
+                readwatch.Users u ON a.id = u.id
             ORDER BY
                 a.id;
             `
@@ -29,6 +33,8 @@ export const GetList = async (req, res) => {
                 grouped.set(row.list_id, {
                     list_id: row.list_id,
                     user_id: row.user_id,
+                    user_name: row.username,
+                    avt_url: row.avatar_url,
                     list_name: row.list_name,
                     description: row.description,
                     created_at: row.created_at,

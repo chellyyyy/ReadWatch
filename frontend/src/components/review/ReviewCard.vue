@@ -93,10 +93,7 @@ const props = defineProps({
         gap: 10px;
 
         .user-icon-src {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            object-fit: cover;
+            @include avatar-size(24px);
         }
 
         .user-name {

@@ -15,6 +15,16 @@
                 />
             </div>
             <div class="list-name">{{ list.list_name }}</div>
+            <div class="user-action">
+                <img :src="list.avt_url" alt="" class="user-icon">
+                <a class="list-user-name" href="/">{{ list.user_name }}</a>
+
+                <img src="https://img.icons8.com/material-rounded/24/737373/like--v1.png" alt="" class="list-react-icon">
+                <span class="list-react-count">{{ list.like }}</span>
+
+                <img src="" alt="" class="cmt-icon">
+                <span class="cmt-count"></span>
+            </div>
         </div>
     </div>
 </template>
@@ -119,6 +129,42 @@ onMounted(async () => {
     text-align: left;
     color: vars.$font-color-primary;
     line-height: 1.3;
+}
+
+.user-action {
+    width: 235px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-top: 10px;
+    font-size: 12px;
+    color: vars.$font-grey;
+    align-items: center;
+    gap: 5px;
+
+    .user-icon {
+        @include avatar-size(24px);
+    }
+
+    .list-user-name {
+        font-weight: bold;
+        text-align: left;
+    }
+
+    a {
+        color: vars.$font-grey;
+    }
+
+    .list-react-icon {
+        margin-left: 5px;
+        // transform: translateY(2px);
+        width: 16px;
+        height: 16px;
+    }
+
+    .list-react-count {
+        font-weight: 300;
+    }
 }
 
 </style>
