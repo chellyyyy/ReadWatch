@@ -13,20 +13,40 @@
         </div>
 
         <!-- Tab Body -->
-        <div class="credit-tags" v-if="currentTab === 'CAST'">
-            <span class="tag" v-for="person in cast" :key="person">{{ person }}</span>
+        <div :class="`${currentTab.toLowerCase()}-container`">
+            <span class="tag" v-for="person in getTabList(currentTab)">{{ person }}</span>
+
+            <div class="crew-container" v-if="currentTab.toLowerCase() === 'crew'">
+                <!-- vai_tro..............ten -->
+                <!-- ... -->
+                <!-- ^ su dung v-for de loop ra danh sach nay -->
+            </div>
         </div>
-        <div class="credit-tags" v-else>
-            <span class="tag">No data yet for {{ currentTab }}</span>
-        </div>
+
     </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import { preprocessCreditData } from '../common/utils';
+
+const props = defineProps({
+    credit: Object
+})
 
 const tabs = ['CAST', 'CREW', 'DETAILS', 'GENRES', 'RELEASES'];
 const currentTab = ref('CAST');
+
+const getTabList = (tab) => {
+    switch(tab) {
+        case 'CAST': return cast;
+        case 'CREW': return crew;
+        case 'DETAILS': return details;
+        case 'GENRES': return genres;
+        case 'RELEASES': return releases;
+        default: return [];
+    }
+}
 
 // Fake data
 const cast = [
@@ -43,6 +63,10 @@ const cast = [
     'Jun Sena',
     'Kaori Shima',
     'Shoko Takada',
+];
+
+const crew = [
+    'CREW',
 ];
 </script>
 
@@ -86,10 +110,11 @@ const cast = [
     }
 }
 
-.credit-tags {
+.cast-container {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
+
 }
 
 .tag {

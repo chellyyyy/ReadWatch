@@ -47,3 +47,21 @@ export const sliceDate = (date) => {
 
     return date.slice(0, 4);
 };
+
+// Group crew member by their job
+export const preprocessCreditData = (crew) => {
+    const result = {};
+
+    crew.forEach((person) => {
+        const job = person.job;
+        const name = person.name;
+
+        if (!result[job]) {
+            result[job] = [];
+        }
+
+        result[job.push(name)];
+    });
+
+    return result;
+};
