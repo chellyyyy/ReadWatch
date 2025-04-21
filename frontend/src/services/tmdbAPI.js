@@ -33,7 +33,7 @@ export const fetchMovie = async (category = 'popular', language = '', page = 1) 
 };
 
 export const getMovieInfo = async (id) => {
-    const url = `api/movies/movie/${id}`;
+    const url = `/api/movies/movie/${id}`;
 
     try {
         const response = await fetch(url);

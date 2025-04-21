@@ -1,13 +1,9 @@
 <template>
     <div class="home">
-        <HomeBanner :url="bannerUrl"/>
+        <HomeBanner :url="bannerUrl" />
         <PageHeader />
         <div id="poppular-list">
-            <MovieCollection 
-                :movies="popularMovies" 
-                size="large"
-                :movieNum="'6'"
-            />
+            <MovieCollection :movies="popularMovies" size="large" :movieNum="'6'" />
         </div>
 
         <div class="introduction">
@@ -15,27 +11,27 @@
                 <p>&nbsp;&nbsp;&nbsp;READWATCH LET YOU...</p>
             </div>
             <div class="promo-container">
-                <PromoItem 
+                <PromoItem
                     iconSrc="https://img.icons8.com/hatch/64/menu-2.png"
                     promoText="Keep track of every film you’ve ever watched (or just start from the day you join)"
                 />
-                <PromoItem 
+                <PromoItem
                     iconSrc="https://img.icons8.com/hatch/64/menu-2.png"
                     promoText="Show some love for your favorite films, lists and reviews with a “like”"
                 />
-                <PromoItem 
+                <PromoItem
                     iconSrc="https://img.icons8.com/hatch/64/menu-2.png"
                     promoText="Write and share reviews, and follow friends and other members to read theirs"
                 />
-                <PromoItem 
+                <PromoItem
                     iconSrc="https://img.icons8.com/hatch/64/menu-2.png"
                     promoText="Rate each film on a five-star scale (with halves) to record and share your reaction"
                 />
-                <PromoItem 
+                <PromoItem
                     iconSrc="https://img.icons8.com/hatch/64/menu-2.png"
                     promoText="Keep a diary of your film watching (and upgrade to Pro for comprehensive stats)"
                 />
-                <PromoItem 
+                <PromoItem
                     iconSrc="https://img.icons8.com/hatch/64/menu-2.png"
                     promoText="Compile and share lists of films on any topic and keep a watchlist of films to see"
                 />
@@ -49,53 +45,38 @@
             </div>
 
             <div class="live-body">
-                <MovieCollection 
-                :movies="popularMovies" 
-                size="small"
-                :movieNum="'12'"
-            />
+                <MovieCollection :movies="popularMovies" size="small" :movieNum="'12'" />
             </div>
         </div>
 
         <div class="mid-title-container">
             <p class="mid-title">Write and share reviews. Compile your own lists. Share your life in film.</p>
-            <p class="mid-intro">Below are some popular reviews and lists from this week. Sign up to create your own.</p>
+            <p class="mid-intro">
+                Below are some popular reviews and lists from this week. Sign up to create your own.
+            </p>
         </div>
 
         <div class="popular-container">
             <div class="popular-left-part">
-                <ListHeader 
-                    list-title="POPULAR REVIEWS THIS WEEK"
-                    link-to="/"
-                />
+                <ListHeader list-title="POPULAR REVIEWS THIS WEEK" link-to="/" />
 
                 <ReviewList />
             </div>
             <div class="popular-right-part">
                 <div class="poppular-upper-right">
-                    <ListHeader 
-                        list-title="POPULAR LISTS"
-                        link-to="/"
-                    />
+                    <ListHeader list-title="POPULAR LISTS" link-to="/" />
                     <ListPreview />
                 </div>
 
                 <div class="poppular-lower-right">
-                    <ListHeader 
-                        list-title="POPULAR REVIEWERS"
-                        link-to="/"
-                    />
+                    <ListHeader list-title="POPULAR REVIEWERS" link-to="/" />
                     <ReviewerList />
                 </div>
             </div>
         </div>
 
         <div class="stories-container">
-            <ListHeader 
-                list-title="RECENT STORIES"
-                link-to="/"
-                list-expand="ALL HQS"
-            />
+            <ListHeader list-title="RECENT STORIES" link-to="/" list-expand="ALL HQS" />
 
             <StoryList />
         </div>
@@ -103,36 +84,31 @@
 </template>
 
 <script setup>
-    import { ref, onMounted } from 'vue';
-    import PageHeader from '@/components/layout/PageHeader.vue';
-    import HomeBanner from '@/components/movie/HomeBanner.vue';
-    import { fetchMovie } from '@/services/tmdbAPI';
-    import MovieCollection from '@/components/movie/MovieCollection.vue';
-    import PromoItem from '@/components/ui/PromoItem.vue';
-    import ReviewList from '@/components/review/ReviewList.vue';
-    import ListHeader from '@/components/ui/ListHeader.vue';
-    import ListPreview from '@/components/list/ListPreview.vue';
-    import ReviewerList from '@/components/review/ReviewerList.vue';
-    import StoryList from '@/components/stories/StoryList.vue';
+import { ref, onMounted } from 'vue';
+import PageHeader from '@/components/layout/PageHeader.vue';
+import HomeBanner from '@/components/movie/HomeBanner.vue';
+import { fetchMovie } from '@/services/tmdbAPI';
+import MovieCollection from '@/components/movie/MovieCollection.vue';
+import PromoItem from '@/components/ui/PromoItem.vue';
+import ReviewList from '@/components/review/ReviewList.vue';
+import ListHeader from '@/components/ui/ListHeader.vue';
+import ListPreview from '@/components/list/ListPreview.vue';
+import ReviewerList from '@/components/review/ReviewerList.vue';
+import StoryList from '@/components/stories/StoryList.vue';
 
-    const popularMovies = ref([]);
-    const bannerUrl = ref('');
-    const randomNum = Math.floor(Math.random() * 20) + 1;
+const popularMovies = ref([]);
+const bannerUrl = ref('');
+const randomNum = Math.floor(Math.random() * 20) + 1;
 
-    onMounted(async () => {        
-        popularMovies.value = await fetchMovie();
-        bannerUrl.value = popularMovies.value[randomNum]['backdrop_path'];
-        
-    })
+onMounted(async () => {
+    popularMovies.value = await fetchMovie();
+    bannerUrl.value = popularMovies.value[randomNum]['backdrop_path'];
+});
 </script>
 
 <style lang="scss" scoped>
 .home {
-    position: relative;
-    background-color: vars.$primary-color;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include main-banner;
 }
 
 #poppular-list {

@@ -32,7 +32,10 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute();
 
-const isHome = computed(() => route.path === '/');
+defineProps({
+    isHome: { type: Boolean, default: true}
+})
+
 </script>
 
 <style lang="scss" scoped>

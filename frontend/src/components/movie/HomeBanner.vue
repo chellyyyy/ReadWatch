@@ -1,40 +1,40 @@
 <template>
     <div class="home-banner">
         <div class="banner-container">
-            <img :src="completeUrl(url)" alt="" class="banner">
+            <img :src="completeUrl(url)" alt="" class="banner" />
             <div class="overlay"></div>
         </div>
 
-        <div class="quote-container">
+        <div v-if="isHomePage" class="quote-container">
             <span class="quote">
-                Track films you've watched. <br> 
-                Save those you want to see. <br>
+                Track films you've watched.
+                <br />
+                Save those you want to see.
+                <br />
                 Tell your friends what's good.
             </span>
         </div>
 
-        <div class="button-container">
-            <BaseButton size="large">
-                Get started - it's free!
-            </BaseButton>
+        <div v-if="isHomePage" class="button-container">
+            <BaseButton size="large">Get started - it's free!</BaseButton>
 
             <span>The social network for film lovers.</span>
         </div>
     </div>
-
 </template>
 
 <script setup>
 import { defineProps } from 'vue';
-import BaseButton from '../ui/BaseButton.vue'
+import BaseButton from '../ui/BaseButton.vue';
 
 defineProps({
-    url: String
-})
+    url: String,
+    isHomePage: { type: Boolean, default: true},
+});
 
-const completeUrl = (url) => {    
+const completeUrl = (url) => {
     return `https://image.tmdb.org/t/p/original${url}`;
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -59,7 +59,7 @@ const completeUrl = (url) => {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(0,0,0,0) 20%, vars.$primary-color 80%, vars.$primary-color 100%);
+    background: radial-gradient(circle, rgba(0, 0, 0, 0) 20%, vars.$primary-color 80%, vars.$primary-color 100%);
 }
 
 .banner {
@@ -73,7 +73,7 @@ const completeUrl = (url) => {
     transform: translateY(-50%);
     width: 100%;
     height: 200px;
-    background: linear-gradient(0deg, vars.$primary-color 60%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(0deg, vars.$primary-color 60%, rgba(255, 255, 255, 0) 100%);
 }
 
 .quote-container {
@@ -109,5 +109,4 @@ const completeUrl = (url) => {
         color: vars.$font-color-primary;
     }
 }
-
 </style>
