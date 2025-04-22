@@ -68,7 +68,7 @@
                         {{ movieDetail.overview }}
                     </div>
 
-                    <MovieCredit />
+                    <MovieCredit v-if="movieDetail.credits" :staff="staffDetail" />
                 </div>
             </div>
         </div>
@@ -88,13 +88,16 @@ const props = defineProps({
 });
 
 const movieDetail = ref({});
+const staffDetail = ref({});
 const directorInfo = ref(null);
 
 onMounted(async () => {
     try {
         // movieDetail.value = await getMovieInfo(props.movie_id);
-        movieDetail.value = await getMovieInfo(1120846); // for test only
+        movieDetail.value = await getMovieInfo(533514); // for test only  1120846
         directorInfo.value = getDirector(movieDetail.value.credits);
+        staffDetail.value = movieDetail.value.credits;
+        // console.log(staffDetail.value);
     } catch (err) {
         console.error('Failed to load movie details:', err);
     }

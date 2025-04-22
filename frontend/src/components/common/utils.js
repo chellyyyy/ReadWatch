@@ -50,6 +50,7 @@ export const sliceDate = (date) => {
 
 // Group crew member by their job
 export const preprocessCreditData = (crew) => {
+    
     const result = {};
 
     crew.forEach((person) => {
@@ -60,7 +61,7 @@ export const preprocessCreditData = (crew) => {
             result[job] = [];
         }
 
-        result[job.push(name)];
+        result[job].push(name);
     });
 
     return result;
